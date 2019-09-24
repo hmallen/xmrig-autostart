@@ -24,10 +24,10 @@ idleMinutes=$2
 
 if [[ -n $idleMinutes ]]; then
 	idleAfter=$((idleMinutes*60000))
-	#echo "Idle timeout set to ${idleMinutes} minutes."
+#	echo "Idle timeout set to ${idleMinutes} minutes."
 else
 	idleAfter=$((idleDefaultMinutes*60000))
-	#echo "Idle timeout set to default of ${idleDefaultMinutes} minutes."
+#	echo "Idle timeout set to default of ${idleDefaultMinutes} minutes."
 fi
 
 echo "Will run ${idleExecStart} after ${idleMinutes} minutes of inactivity."
@@ -50,24 +50,25 @@ echo
 idle=false
 
 while true; do
-#  idleTimeMillis=$(./getIdle)
-  idleTImeMillis=$(/home/hunter/.xmrig/monitor/getIdle)
-  #echo $idleTimeMillis  # just for debug purposes.
-  if [[ $idle = false && $idleTimeMillis -gt $idleAfter ]] ; then
-    echo "System idle detected."   # run command here
-#    /home/hunter/.xmrig/start-miners.sh
-    $idleExecStart
-    idle=true
-  fi
+#	idleTimeMillis=$(./getIdle)
+	idleTImeMillis=$(/home/hunter/.xmrig/monitor/getIdle)
+#	echo $idleTimeMillis  # just for debug purposes.
+	if [[ $idle = false && $idleTimeMillis -gt $idleAfter ]] ; then
+#		echo "System idle detected."   # run command here
+#		/home/hunter/.xmrig/start-miners.sh
+		$idleExecStart
+		idle=true
+	fi
 
-  if [[ $idle = true && $idleTimeMillis -lt $idleAfter ]] ; then
-    echo "System no longer idle."     # same here
-#    /home/hunter/.xmrig/stop-miners.sh
-    if [[ -n $idleExecStop ]]; then
-        $idleExecStop
-    fi
-    idle=false
-  fi
-  sleep 1      # polling interval
+	if [[ $idle = true && $idleTimeMillis -lt $idleAfter ]] ; then
+		echo "System no longer idle."     # same here
+#		/home/hunter/.xmrig/stop-miners.sh
+		if [[ -n $idleExecStop ]]; then
+			$idleExecStop
+		fi
+		idle=false
+	fi
+
+	sleep 1      # polling interval
 
 done
