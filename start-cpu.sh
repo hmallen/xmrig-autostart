@@ -1,6 +1,6 @@
 #!/bin/bash
 
-screen -A -m -d -S xmrig /home/hunter/src/xmrig/build/xmrig \
+screen -A -m -d -S xmrig-CPU /home/hunter/src/xmrig/build/xmrig \
 	-l /home/hunter/.xmrig/xmrig.log --donate-level 0 \
 	-o pool.supportxmr.com:5555 -u 869NJQgVEXhhfHfZipzgeRF84ZRWZLkqugbJPuZYqgaMYtsTJHtLoSbaiYkKpEdXh1W15W7kHNE7zLw5W9FqJcsFH51bskN \
 	-p ChasseuR:allenhm@gmail.com -k --config=/home/hunter/.xmrig/config.json &
