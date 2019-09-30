@@ -51,14 +51,14 @@ echo
 idle=false
 
 while true; do
-	idleTimeMillis=$(./getIdle)
-#	idleTImeMillis=$(/home/hunter/.xmrig/monitor/getIdle)
-#	echo $idleTimeMillis  # just for debug purposes.
+#	idleTimeMillis=$(./getIdle)
+	idleTimeMillis=$(/home/hunter/.xmrig/monitor/getIdle)
+	echo $idleTimeMillis  # just for debug purposes.
 	if [[ $idle = false && $idleTimeMillis -gt $idleAfter ]] ; then
 #		echo "System idle detected."   # run command here
 #		/home/hunter/.xmrig/start-miners.sh
 		echo "Executing ${idleExecStart}."
-		bash $idleExecStart
+		/bin/bash $idleExecStart
 		idle=true
 	fi
 
@@ -67,7 +67,7 @@ while true; do
 #		/home/hunter/.xmrig/stop-miners.sh
 		if [[ -n $idleExecStop ]]; then
 			echo "Executing ${idleExecStop}."
-			bash $idleExecStop
+			/bin/bash $idleExecStop
 		fi
 		idle=false
 	fi
